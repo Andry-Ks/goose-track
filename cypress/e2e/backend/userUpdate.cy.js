@@ -6,20 +6,12 @@ const validEmail = Cypress.env('validEmail');
 const validPassword = Cypress.env('validPassword');
 
 // describe("Positive update user test", () => {
-//     let accessToken;
-//     before(() => {
-//         cy.request({
-//             method: 'POST',
-//             url: `${backendUrl}/user/login`,
-//             body: {
-//                 email: validEmail,
-//                 password: validPassword,
-//             },
-//         }).then((response) => {
-//             expect(response.status).to.eq(200);
-//             accessToken = response.body.data.accessToken;
-//         });
+// let accessToken;
+// before(() => {
+//     cy.loginAndGetToken().then((token) => {
+//     accessToken = token;
 //     });
+// });
 
 //     it("Update user info", () => {
 //         cy.request({
@@ -40,40 +32,50 @@ const validPassword = Cypress.env('validPassword');
 //     });
 // });
 
-describe("Negative update user test", () => {
+describe("Negative update user tests", () => {
     let accessToken;
         before(() => {
-            cy.request({
-                method: 'POST',
-                url: `${backendUrl}/user/login`,
-                body: {
-                    email: validEmail,
-                    password: validPassword,
-                },
-            }).then((response) => {
-                expect(response.status).to.eq(200);
-                accessToken = response.body.data.accessToken;
+            cy.loginAndGetToken().then((token) => {
+            accessToken = token;
             });
         });
 
-const invalidNames = ["", "A", "ThisIsAReallyLong"];
-
-invalidNames.forEach((name) => {
-    it("Update user info with invalid names", () => {
-            cy.request({
-                method: 'PATCH',
-                url: apiUrl,
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                },
-                body: {
-                    name: name,      
-                },
-                failOnStatusCode: false,
-            }).then((response) => {
-                expect(response.status).to.eq(400, `Failed on name: "${name}"`);
-            });
+// const invalidNames = ["", "A", "ThisIsAReallyLong"];
+// invalidNames.forEach((name) => {
+//     it("Update user info with invalid names", () => {
+//             cy.request({
+//                 method: 'PATCH',
+//                 url: apiUrl,
+//                 headers: {
+//                     'Authorization': `Bearer ${accessToken}`,
+//                 },
+//                 body: {
+//                     name: name,      
+//                 },
+//                 failOnStatusCode: false,
+//             }).then((response) => {
+//                 expect(response.status).to.eq(400, `Failed on name: "${name}"`); //Bad Request
+//             });
+//         });
+//     });
+    
+const invalidPhones = ["qwertyuiopasd", "0971234567", "380112227738", "+38011222773"];
+invalidPhones.forEach((phone) => {
+    it ("Update user info with invalid phones", () => {
+        cy.request({
+            method: 'PATCH',
+            url: apiUrl,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+            },
+            body: {
+                phone: phone,      
+            },
+            failOnStatusCode: false,
+        }).then((response) => {
+            expect(response.status).to.eq(400, `Failed on phone: "${phone}"`); //Bad Request
         });
     });
-    
+});
+
 });

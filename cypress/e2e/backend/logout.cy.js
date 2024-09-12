@@ -6,20 +6,12 @@ const validEmail = Cypress.env('validEmail');
 const validPassword = Cypress.env('validPassword');
 
 describe("User logout test", () => {
-    let accessToken;
-    before(() => {
-      cy.request({
-        method: 'POST',
-        url: `${backendUrl}/user/login`,
-        body: {
-          email: validEmail,
-          password: validPassword,
-        },
-      }).then((response) => {
-        expect(response.status).to.eq(200)
-        accessToken = response.body.data.accessToken
+  let accessToken;
+  before(() => {
+      cy.loginAndGetToken().then((token) => {
+      accessToken = token;
       });
-    });
+  });
   
     it("Logout user", () => {
       cy.request({

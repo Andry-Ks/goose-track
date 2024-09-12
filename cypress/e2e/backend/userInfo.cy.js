@@ -2,9 +2,6 @@
 const backendUrl = Cypress.env('backendUrl');
 const apiUrl = `${backendUrl}/user/info`;
 
-const validEmail = Cypress.env('validEmail');
-const validPassword = Cypress.env('validPassword');
-
 describe("Get user info test", () => {
   let accessToken;
   before(() => {
@@ -16,7 +13,7 @@ describe("Get user info test", () => {
     it ("Get info", () => {
         cy.request({
             method: 'GET',
-            url: apiUrl,
+            url: `${backendUrl}/user/info`,
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
             },
@@ -28,7 +25,7 @@ describe("Get user info test", () => {
     it("Get info with invalid token", () => {
         cy.request({
             method: 'GET',
-            url: apiUrl,
+            url: `${backendUrl}/user/info`,
             headers: {
                 'Authorization': 'Bearerinvalid_token',
             },
@@ -41,7 +38,7 @@ describe("Get user info test", () => {
     it("Get info without token", () => {
         cy.request({
             method: 'GET',
-            url: apiUrl,
+            url: `${backendUrl}/user/info`,
             failOnStatusCode: false
         }).then((response) => {
             expect(response.status).to.eq(401);

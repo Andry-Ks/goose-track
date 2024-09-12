@@ -10,7 +10,7 @@ describe ("Update task data", () => {
     });
 
         let taskId;
-        before(() => {
+        before(() => { //Create task
         const newTask = {
             title: "toDo Update",
             start: "9-35",

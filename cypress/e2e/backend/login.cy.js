@@ -1,6 +1,5 @@
 "use strict";
 const backendUrl = Cypress.env('backendUrl');
-const apiUrl = `${backendUrl}/user/login`;
 
 const validEmail = Cypress.env('validEmail');
 const validPassword = Cypress.env('validPassword');
@@ -12,7 +11,7 @@ describe ("Positive login test", () => {
     it ("Login", () => {
         cy.request ({
             method: 'POST',
-            url: apiUrl,
+            url: `${backendUrl}/user/login`,
             body: {
                 email: validEmail,
                 password: validPassword,
@@ -27,7 +26,7 @@ describe("Negative login tests", () => {
     it("Login with wrong email", () => {
         cy.request({
             method: 'POST',
-            url: apiUrl,
+            url: `${backendUrl}/user/login`,
             body: {
                 email: wrongEmail,
                 password: validPassword,
@@ -41,7 +40,7 @@ describe("Negative login tests", () => {
     it("Login with wrong password", () => {
         cy.request({
             method: 'POST',
-            url: apiUrl,
+            url: `${backendUrl}/user/login`,
             body: {
                 email: validEmail,
                 password: wrongPassword,
@@ -55,7 +54,7 @@ describe("Negative login tests", () => {
     it("Login with missing password", () => {
         cy.request({
             method: 'POST',
-            url: apiUrl,
+            url: `${backendUrl}/user/login`,
             body: {
                 email: validEmail,
                 password: "",
@@ -66,18 +65,18 @@ describe("Negative login tests", () => {
         });
     });
 
-    // it("Login with incorrect method", () => {
-    //     cy.request({
-    //         method: 'PATCH',
-    //         url: apiUrl,
-    //         body: {
-    //             email: validEmail,
-    //             password: validPassword,
-    //         },
-    //         failOnStatusCode: false
-    //     }).then((response) => {
-    //         expect(response.status).to.eq(405); //The error is not being handled by the server. Developers need to be informed.
-    //     });
-    // });
+    it("Login with incorrect method", () => {
+        cy.request({
+            method: 'PATCH',
+            url: `${backendUrl}/user/login`,
+            body: {
+                email: validEmail,
+                password: validPassword,
+            },
+            failOnStatusCode: false
+        }).then((response) => {
+            expect(response.status).to.eq(405); //The error is not being handled by the server. Developers need to be informed.
+        });
+    });
     
 });

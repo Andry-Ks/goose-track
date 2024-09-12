@@ -13,7 +13,7 @@ describe("Get list of tasks", () => {
     it("Positive test. Get tasks for a specific month and year", () => {
         cy.request({
             method: 'GET',
-            url: apiUrl,
+            url: `${backendUrl}/task/by-month`,
             qs: {
                 year: 2024,
                 month: 9
@@ -30,7 +30,7 @@ describe("Get list of tasks", () => {
     it("Negative test. Request without token", () => {
         cy.request({
             method: "GET",
-            url: apiUrl,
+            url: `${backendUrl}/task/by-month`,
             qs: {
                 year: 2024,
                 month: 9
@@ -44,7 +44,7 @@ describe("Get list of tasks", () => {
     it("Negative test. Request without year and month", () => {
         cy.request({
             method: "GET",
-            url: apiUrl,
+            url: `${backendUrl}/task/by-month`,
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },

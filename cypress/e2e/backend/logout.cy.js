@@ -1,9 +1,5 @@
 "use strict";
 const backendUrl = Cypress.env('backendUrl');
-const apiUrl = `${backendUrl}/user/logout`;
-
-const validEmail = Cypress.env('validEmail');
-const validPassword = Cypress.env('validPassword');
 
 describe("User logout test", () => {
   let accessToken;
@@ -13,10 +9,10 @@ describe("User logout test", () => {
       });
   });
   
-    it("Logout user", () => {
+    it("Positive test. Logout user", () => {
       cy.request({
         method: 'GET',
-        url: apiUrl,
+        url: `${backendUrl}/user/logout`,
         headers: {
             'Authorization': `Bearer ${accessToken}`,
         },
@@ -25,10 +21,10 @@ describe("User logout test", () => {
       });
     });
 
-    it("Logout user again with the same token", () => {
+    it("Negative test. Logout user again with the same token", () => {
       cy.request({
           method: 'GET',
-          url: apiUrl,
+          url: `${backendUrl}/user/logout`,
           headers: {
               'Authorization': `Bearer ${accessToken}`,
           },

@@ -1,6 +1,5 @@
 "use strict";
 const backendUrl = Cypress.env('backendUrl');
-const apiUrl = `${backendUrl}/user/refresh`;
 
 const validEmail = Cypress.env('validEmail');
 const validPassword = Cypress.env('validPassword');
@@ -26,7 +25,7 @@ describe("Refresh token test", () => {
     it("Positive test. Refresh access token", () => {
         cy.request({
           method: 'POST',
-          url: apiUrl,
+          url: `${backendUrl}/user/refresh`,
           headers: {
             'Authorization': `Bearer ${refreshToken}`,
           },
@@ -37,7 +36,7 @@ describe("Refresh token test", () => {
         });
       });
 
-      it("Negative test. Refresh with blacklisted token", () => {
+      it("Logout", () => {
         cy.request({
             method: 'GET',
             url: `${backendUrl}/user/logout`,
@@ -47,10 +46,12 @@ describe("Refresh token test", () => {
           }).then((response) => {
             expect(response.status).to.eq(200)
           });
+        });
         
-        cy.request({
+        it("Negative test. Refresh after logout", () => {
+          cy.request({
             method: 'POST',
-            url: apiUrl,
+            url: `${backendUrl}/user/refresh`,
             headers: {
                 'Authorization': `Bearer ${refreshToken}`,
             },

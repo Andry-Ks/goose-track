@@ -8,9 +8,12 @@ module.exports = defineConfig({
     },
     env: {
       backendUrl: 'https://goose-tracker-backend.p.goit.global',
+      frontendUrl: 'https://goose-track-qa.netlify.app/',
 
       validEmail: process.env.CYPRESS_VALID_EMAIL,
       validPassword: process.env.CYPRESS_VALID_PASSWORD,
     },
+    viewportWidth: 1440,
+    viewportHeight: 900,
   },
 });

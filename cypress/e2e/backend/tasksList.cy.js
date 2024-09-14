@@ -1,6 +1,5 @@
 "use strict";
 const backendUrl = Cypress.env('backendUrl');
-const apiUrl = `${backendUrl}/task/by-month`;
 
 describe("Get list of tasks", () => {
     let accessToken;

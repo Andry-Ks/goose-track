@@ -23,4 +23,7 @@ describe ("Open calendar page", () => {
         cy.get('button[aria-label="month"]').click();
     });
 
+    after (() => {
+        cy.contains('span', 'Log out').click();
+    });
 });

@@ -7,5 +7,4 @@ describe ("Main page", () => {
         cy.get('a[href="/register"]').should('be.visible');
         cy.get('a[href="/login"]').should('be.visible');
     });
-
 });

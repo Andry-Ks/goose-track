@@ -15,4 +15,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests
+        env:
+          CYPRESS_VALID_EMAIL: ${{ secrets.CYPRESS_VALID_EMAIL }}
+          CYPRESS_VALID_PASSWORD: ${{ secrets.CYPRESS_VALID_PASSWORD }}
         run: npx cypress run

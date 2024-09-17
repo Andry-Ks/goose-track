@@ -16,15 +16,12 @@ describe ("Positive test. Update user data", () => {
         cy.intercept('GET', '**/user/info').as('getUserInfo'); 
         cy.wait('@getUserInfo'); // Wait for the request to complete
         
-        cy.get('input[name="name"]').clear({ force: true }).type(validName).should('have.value', validName);
-        cy.get('input[name="phone"]').clear({ force: true }).type(validPhone).should('have.value', validPhone);
-        cy.get('input[name="skype"]').clear({ force: true }).type(validSkype).should('have.value', validSkype);
-
-
-
+        cy.get('input[name="name"]').clear().type(validName).should('have.value', validName);
+        cy.get('input[name="phone"]').clear().type(validPhone).should('have.value', validPhone);
+        cy.get('input[name="skype"]').clear().type(validSkype).should('have.value', validSkype);
+        cy.contains('Save changes').click();
     });
-
-    // after (() => {
-    //     cy.contains('span', 'Log out').click();
-    // });
+    after (() => {
+        cy.contains('span', 'Log out').click();
+    });
 });

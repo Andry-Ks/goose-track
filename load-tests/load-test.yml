@@ -1,0 +1,10 @@
+config:
+  target: "https://goose-track-qa.netlify.app/"
+  phases:
+    - duration: 4 # Тривалість тесту в секундах
+      arrivalRate: 1 # Кількість користувачів на секунду
+
+scenarios:
+  - flow:
+      - get:
+          url: "/"

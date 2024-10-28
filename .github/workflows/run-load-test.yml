@@ -17,7 +17,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install -g artillery
 
       - name: Run Artillery load test
-        run: npm run load-test
+        run: artillery run load-tests/load-test.yml

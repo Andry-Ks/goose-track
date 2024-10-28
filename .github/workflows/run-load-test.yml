@@ -20,4 +20,4 @@ jobs:
         run: npm install
 
       - name: Run Artillery load test
-        run: artillery run load-tests/load-test.yml
+        run: npm run load-test

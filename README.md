@@ -13,7 +13,7 @@ Automated frontend and backend tests for the GooseTrack task tracker, built with
 - **Run a specific test**: npx cypress run --spec cypress/e2e/frontend/test-name.cy.js
 - **Run in UI mode**: npx cypress open
 
-## 📂 Project Structure
+## Project Structure
 - 📁 **cypress/**
   - 📁 **e2e/** – test files  
     - 📁 **frontend/** – frontend tests  
